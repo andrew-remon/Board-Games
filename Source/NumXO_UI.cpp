@@ -22,6 +22,13 @@ Player<int>* NumXO_UI::create_player(string& name, int symbol, PlayerType type)
 
 Move<int>* NumXO_UI::get_move(Player<int>* player)
 {
+    // call NumXO_Player-specific functions
+    NumXO_Player* numPlayer = dynamic_cast<NumXO_Player*>(player);
+
+    if (numPlayer) {
+        numPlayer->set_symbol();
+    }
+
     int x, y;
 
     if (player->get_type() == PlayerType::HUMAN)
@@ -29,15 +36,14 @@ Move<int>* NumXO_UI::get_move(Player<int>* player)
         cout << "\nPlease enter your move x and y (0 to 2): ";
         cin >> x >> y;
     }
-
     else if (player->get_type() == PlayerType::COMPUTER)
     {
         x = rand() % player->get_board_ptr()->get_rows();
         y = rand() % player->get_board_ptr()->get_columns();
+        cout << player->get_name() << " chose position (" << x << ", " << y << ")\n";
     }
 
-    // player->set_symbol();
-
+    // update symbol
     return new Move<int>(x, y, player->get_symbol());
 }
 
