@@ -1,3 +1,4 @@
+// NumXO_Board.h
 #pragma once
 #include <iostream>
 #include "BoardGame_Classes.h"
@@ -10,6 +11,8 @@ private:
 
 public:
     NumXO_Board();
+
+    // why no deconstructor ??
 
     bool is_cell_empty(int cell);
 

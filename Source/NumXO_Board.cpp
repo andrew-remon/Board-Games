@@ -1,3 +1,4 @@
+//NumXO_Board.cpp
 #include "NumXO_Board.h"
 
 NumXO_Board::NumXO_Board() : Board(3,3)
@@ -19,7 +20,7 @@ bool NumXO_Board::update_board(Move<int>* move)
     int y = move->get_y();
     int symbol = move->get_symbol();
 
-    if ((x >= 0 && x <= rows) && (y >= 0 && y <= columns) && is_cell_empty(board[x][y]))
+    if ((x >= 0 && x < rows) && (y >= 0 && y < columns) && is_cell_empty(board[x][y]))
     {
         // Apply move
         n_moves++;
