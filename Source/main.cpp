@@ -50,6 +50,7 @@ void RunSuSXO() {
     Board<char>* board = new SuS_TTT_Board();
     Player<char>** players = ui->setup_players();
     GameManager<char> susGame(board, players, ui);
+    
 
     // ==== SuS Game Manager Run Function ====
     

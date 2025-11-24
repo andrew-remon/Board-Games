@@ -1,6 +1,5 @@
 #pragma once
 #include "BoardGame_Classes.h"
-#include "SuS_TTT_Player.h"
 
 class SuS_TTT_UI : public UI<char>
 {
