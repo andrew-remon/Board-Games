@@ -6,6 +6,8 @@
 #include "MisereXO_UI.h"
 #include "NumXO_Board.h"
 #include "NumXO_UI.h"
+#include "SuS_TTT_Board.h"
+#include "SuS_TTT_UI.h"
 using namespace std;
 
 
@@ -40,22 +42,47 @@ void RunNumXO() {
     delete players[1];
     delete[] players;
 }
+void RunSuSXO() {
 
-int main() {
+    // ============= SuS Init ================
+
+    UI<char>* ui = new SuS_TTT_UI();
+    Board<char>* board = new SuS_TTT_Board();
+    Player<char>** players = ui->setup_players();
+    GameManager<char> susGame(board, players, ui);
+
+    // ==== SuS Game Manager Run Function ====
+    
+    susGame.run();
+
+    // ============= clean up ================
+    delete board;
+    delete ui;
+    for (int i = 0; i < 2; ++i)
+        delete players[i];
+    delete[] players;
+}
+
+
+void main() {
     cout << "Choose a Game To Play\n";
     cout << "[1] MisereXO \n";
     cout << "[2] NumXO \n";
+    cout << "[3] SusXO \n";
     
     // will convert to enum later
     int x;
     cin >> x;
-    if (x == 1)
+    switch(x)
     {
+    case 1:
         RunMisereXO();
-    }
-    if(x == 2)
-    {
+        break;
+    case 2:
         RunNumXO();
+        break;
+    case 3:
+        RunSuSXO();
+        break;
     }
-    return 0;
 }
