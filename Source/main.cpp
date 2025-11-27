@@ -8,10 +8,56 @@
 #include "SuS_TTT_UI.h"
 #include "4X4board.h"
 #include "4X4UI.h"
+#include "5x5XO_Classes.h"
+#include "Infinity_XO_Classes.h"
+#include "InputValidation.h"
 
 using namespace std;
 
 // ======= Game Runners =======
+
+void RunInfinityXO()
+{
+    UI<char>* game_ui = new XO_UI();
+
+    Board<char>* xo_board = new X_O_Board();
+
+    Player<char>** players = game_ui->setup_players();
+
+    GameManager<char> x_o_game(xo_board, players, game_ui);
+
+    x_o_game.run();
+
+    // --- Cleanup ---
+    delete xo_board;
+
+    delete players[0];
+    delete players[1];
+
+    delete[] players;
+
+}
+
+void Run5x5XO()
+{
+    UI<char>* game_ui = new XO_UI();
+
+    Board<char>* xo_board = new X_O_Board();
+
+    Player<char>** players = game_ui->setup_players();
+
+    GameManager<char> x_o_game(xo_board, players, game_ui);
+
+    x_o_game.run();
+
+    // --- Cleanup ---
+    delete xo_board;
+
+    for (int i = 0; i < 2; ++i)
+        delete players[i];
+
+    delete[] players;
+}
 
 void RunMisereXO() {
     Board<char>* board = new MisereXO_Board();
@@ -54,11 +100,10 @@ void RunSuSXO() {
     // Clean up
     delete board;
     delete ui;
-    for (int i = 0; i < 2; ++i)
-        delete players[i];
+    delete players[0];
+    delete players[1];
     delete[] players;
 }
-
 
 void Run4X4Game() {
     Board<char>* board = new Board4X4();
@@ -77,15 +122,18 @@ void Run4X4Game() {
 
 // ======= Main Menu =======
 
-int main() {
+int main()
+{
     cout << "Choose a Game To Play\n";
-    cout << "[1] MisereXO \n";
-    cout << "[2] NumXO \n";
-    cout << "[3] SusXO \n";
-    cout << "[4] 4x4 Tic-Tac-Toe \n";
+    cout << "[1] MisereXO\n";
+    cout << "[2] NumXO\n";
+    cout << "[3] SusXO\n";
+    cout << "[4] 4x4 XO\n";
+    cout << "[5] 5x5 XO\n";
+    cout << "[6] Infinity XO\n";
 
-    int x;
-    cin >> x;
+    int x = InputValidation::readIntNumberBetween(1, 6, "Invalid Input, Please Enter a number from 1 to 6");
+    // cin >> x;
 
 	// will use enum later for better readability
     switch (x) {
@@ -100,6 +148,12 @@ int main() {
         break;
     case 4:
         Run4X4Game();
+        break;
+    case 5:
+        Run5x5XO();
+        break;
+    case 6:
+        RunInfinityXO();
         break;
     default:
         cout << "Invalid Choice.\n";
