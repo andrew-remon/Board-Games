@@ -21,7 +21,8 @@ template <typename T> class Move;
 /**
  * @brief Represents the type of player in the game.
  */
-enum class PlayerType {
+enum class PlayerType
+{
     HUMAN,     ///< A human player.
     COMPUTER,  ///< A computer-controlled player.
     AI,        ///< An AI player.
@@ -78,7 +79,8 @@ public:
     /**
      * @brief Return a copy of the current board as a 2D vector.
      */
-    vector<vector<T>> get_board_matrix() const {
+    vector<vector<T>> get_board_matrix() const
+    {
         return board;
     }
 
@@ -96,7 +98,8 @@ public:
  * @tparam T Type of symbol placed on the board (e.g., char, int).
  */
 template <typename T>
-class Move {
+class Move
+{
     int x;      ///< Row index
     int y;      ///< Column index
     T symbol;   ///< Symbol used in the move
@@ -122,11 +125,12 @@ public:
  * @tparam T Type of symbol used by the player.
  */
 template <typename T>
-class Player {
+class Player
+{
 protected:
     string name;         ///< Player name
     PlayerType type;     ///< Player type (e.g., HUMAN or COMPUTER)
-    T symbol;            ///< Player�s symbol on board
+    T symbol;            ///< Player's symbol on board
     Board<T>* boardPtr;  ///< Pointer to the game board
 
 public:
@@ -147,6 +151,8 @@ public:
     /** @brief Get the player's symbol. */
     T get_symbol() const { return symbol; }
 
+    virtual void set_symbol() {};
+    
     /** @brief Get a pointer to the game board. */
     Board<T>* get_board_ptr() const { return boardPtr; }
 
@@ -168,7 +174,8 @@ protected:
     /**
      * @brief Ask the user for the player's name.
      */
-    string get_player_name(string player_label) {
+    string get_player_name(string player_label)
+    {
         string name;
         cout << "Enter " << player_label << " name: ";
         getline(cin >> ws, name);
@@ -178,12 +185,16 @@ protected:
     /**
      * @brief Ask the user to choose the player type from a list.
      */
-    PlayerType get_player_type_choice(string player_label, const vector<string>& options) {
+    PlayerType get_player_type_choice(string player_label, const vector<string>& options)
+    {
         cout << "Choose " << player_label << " type:\n";
+
         for (size_t i = 0; i < options.size(); ++i)
             cout << i + 1 << ". " << options[i] << "\n";
+
         int choice;
         cin >> choice;
+
         return (choice == 2) ? PlayerType::COMPUTER : PlayerType::HUMAN;
     }
 
@@ -219,7 +230,8 @@ public:
     /**
      * @brief Display the current board matrix in formatted form.
      */
-    void display_board_matrix(const vector<vector<T>>& matrix) const {
+    void display_board_matrix(const vector<vector<T>>& matrix) const
+    {
         if (matrix.empty() || matrix[0].empty()) return;
 
         int rows = matrix.size();
@@ -247,7 +259,8 @@ public:
  * @tparam T Type of symbol used on the board.
  */
 template <typename T>
-class GameManager {
+class GameManager
+{
     Board<T>* boardPtr;    ///< Game board
     Player<T>* players[2]; ///< Two players
     UI<T>* ui;             ///< User interface
@@ -256,8 +269,8 @@ public:
     /**
      * @brief Construct a game manager with board, players, and UI.
      */
-    GameManager(Board<T>* b, Player<T>* p[2], UI<T>* u)
-        : boardPtr(b), ui(u) {
+    GameManager(Board<T>* b, Player<T>* p[2], UI<T>* u) : boardPtr(b), ui(u)
+    {
         players[0] = p[0];
         players[1] = p[1];
         players[0]->set_board_ptr(b);
@@ -267,13 +280,17 @@ public:
     /**
      * @brief Run the main game loop until someone wins or the game ends.
      */
-    void run() {
+    void run()
+    {
         ui->display_board_matrix(boardPtr->get_board_matrix());
         Player<T>* currentPlayer = players[0];
 
-        while (true) {
-            for (int i : {0, 1}) {
+        while (true)
+        {
+            for (int i : {0, 1})
+            {
                 currentPlayer = players[i];
+
                 Move<T>* move = ui->get_move(currentPlayer);
 
                 while (!boardPtr->update_board(move))
@@ -281,15 +298,18 @@ public:
 
                 ui->display_board_matrix(boardPtr->get_board_matrix());
 
-                if (boardPtr->is_win(currentPlayer)) {
+                if (boardPtr->is_win(currentPlayer))
+                {
                     ui->display_message(currentPlayer->get_name() + " wins!");
                     return;
                 }
-                if (boardPtr->is_lose(currentPlayer)) {
+                if (boardPtr->is_lose(currentPlayer))
+                {
                     ui->display_message(players[1 - i]->get_name() + " wins!");
                     return;
                 }
-                if (boardPtr->is_draw(currentPlayer)) {
+                if (boardPtr->is_draw(currentPlayer))
+                {
                     ui->display_message("Draw!");
                     return;
                 }

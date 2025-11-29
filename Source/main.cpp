@@ -10,11 +10,35 @@
 #include "4X4UI.h"
 #include "5x5XO_Classes.h"
 #include "Infinity_XO_Classes.h"
+#include "Word_XO_Classes.h"
 #include "InputValidation.h"
 
 using namespace std;
 
 // ======= Game Runners =======
+
+void RunWordXO()
+{
+    UI<char>* game_ui = new XO_UI();
+
+    Board<char>* xo_board = new X_O_Board();
+
+    Player<char>** players = game_ui->setup_players();
+
+    GameManager<char> x_o_game(xo_board, players, game_ui);
+
+    x_o_game.run();
+
+    // --- Cleanup ---
+    delete xo_board;
+
+    delete game_ui;
+
+    delete players[0];
+    delete players[1];
+
+    delete[] players;
+}
 
 void RunInfinityXO()
 {
@@ -30,6 +54,8 @@ void RunInfinityXO()
 
     // --- Cleanup ---
     delete xo_board;
+
+    delete game_ui;
 
     delete players[0];
     delete players[1];
@@ -53,8 +79,10 @@ void Run5x5XO()
     // --- Cleanup ---
     delete xo_board;
 
-    for (int i = 0; i < 2; ++i)
-        delete players[i];
+    delete game_ui;
+
+    delete players[0];
+    delete players[1];
 
     delete[] players;
 }
@@ -94,7 +122,6 @@ void RunSuSXO() {
     Board<char>* board = new SuS_TTT_Board();
     Player<char>** players = ui->setup_players();
     GameManager<char> susGame(board, players, ui);
-
     susGame.run();
 
     // Clean up
@@ -131,8 +158,9 @@ int main()
     cout << "[4] 4x4 XO\n";
     cout << "[5] 5x5 XO\n";
     cout << "[6] Infinity XO\n";
+    cout << "[7] Word XO\n";
 
-    int x = InputValidation::readIntNumberBetween(1, 6, "Invalid Input, Please Enter a number from 1 to 6");
+    int x = InputValidation::readIntNumberBetween(1, 6, "Invalid Input, Please Enter a number from 1 to 7");
     // cin >> x;
 
 	// will use enum later for better readability
@@ -155,6 +183,8 @@ int main()
     case 6:
         RunInfinityXO();
         break;
+    case 7:
+        RunWordXO();
     default:
         cout << "Invalid Choice.\n";
         break;
