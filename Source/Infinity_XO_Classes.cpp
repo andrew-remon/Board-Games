@@ -9,7 +9,7 @@ using namespace std;
 
 //--------------------------------------- X_O_Board Implementation
 
-X_O_Board::X_O_Board() : Board(3, 3)
+inf_X_O_Board::inf_X_O_Board() : Board(3, 3)
 {
     // Initialize all cells with blank_symbol
     for (auto& row : board)
@@ -17,7 +17,7 @@ X_O_Board::X_O_Board() : Board(3, 3)
             cell = blank_symbol;
 }
 
-bool X_O_Board::update_board(Move<char>* move)
+bool inf_X_O_Board::update_board(Move<char>* move)
 {
     int x = move->get_x();
     int y = move->get_y();
@@ -56,7 +56,7 @@ bool X_O_Board::update_board(Move<char>* move)
     return false;
 }
 
-bool X_O_Board::is_win(Player<char>* player)
+bool inf_X_O_Board::is_win(Player<char>* player)
 {
     const char sym = player->get_symbol();
 
@@ -81,24 +81,24 @@ bool X_O_Board::is_win(Player<char>* player)
     return false;
 }
 
-bool X_O_Board::is_draw(Player<char>* player) {
+bool inf_X_O_Board::is_draw(Player<char>* player) {
     return false;
 }
 
-bool X_O_Board::game_is_over(Player<char>* player) {
+bool inf_X_O_Board::game_is_over(Player<char>* player) {
     return is_win(player) || is_draw(player);
 }
 
 //------------------- XO_UI Implementation --------------------
 
-XO_UI::XO_UI() : UI<char>("Welcome to Our FCAI Infinity X-O Game\n", 3)
+inf_XO_UI::inf_XO_UI() : UI<char>("Welcome to Our FCAI Infinity X-O Game\n", 3)
 {
     cout << "This is a regular 3x3 Tic Tac Toe Game note that:\n";
     cout << "[1] After every three moves, the oldest mark on the board disappears.\n";
     cout << "[2] The first player to align three marks in a row before any of those marks vanish wins the game\n\n";
 }
 
-Player<char>* XO_UI::create_player(string& name, char symbol, PlayerType type)
+Player<char>* inf_XO_UI::create_player(string& name, char symbol, PlayerType type)
 {
     // Create player based on type
     cout << "Creating " << (type == PlayerType::HUMAN ? "human" : "computer")
@@ -107,7 +107,7 @@ Player<char>* XO_UI::create_player(string& name, char symbol, PlayerType type)
     return new Player<char>(name, symbol, type);
 }
 
-Move<char>* XO_UI::get_move(Player<char>* player)
+Move<char>* inf_XO_UI::get_move(Player<char>* player)
 {
     int x, y;
 

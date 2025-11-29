@@ -7,8 +7,8 @@
  * - `XO_UI`: A user interface class tailored to X-O game setup and player interaction.
  */
 
-#ifndef XO_CLASSES_H
-#define XO_CLASSES_H
+#ifndef _5X5_XO_CLASSES_H
+#define _5x5_XO_CLASSES_H
 
 #include "BoardGame_Classes.h"
 using namespace std;
@@ -32,7 +32,7 @@ using namespace std;
  *
  * @see Board
  */
-class X_O_Board : public Board<char> {
+class _5X5_X_O_Board : public Board<char> {
 private:
     char blank_symbol = '.'; ///< Character used to represent an empty cell on the board.
     int playerXSequences = 0;
@@ -42,42 +42,42 @@ public:
     /**
      * @brief Default constructor that initializes a 3x3 X-O board.
      */
-    X_O_Board();
+    _5X5_X_O_Board();
 
     /**
      * @brief Updates the board with a player's move.
      * @param move Pointer to a Move<char> object containing move coordinates and symbol.
      * @return true if the move is valid and successfully applied, false otherwise.
      */
-    bool update_board(Move<char>* move);
+    bool update_board(Move<char>* move) override;
 
     /**
      * @brief Checks if the given player has won the game.
      * @param player Pointer to the player being checked.
      * @return true if the player has a winning line, false otherwise.
      */
-    bool is_win(Player<char> * player);
+    bool is_win(Player<char> * player) override;
 
     /**
      * @brief Checks if the given player has lost the game.
      * @param player Pointer to the player being checked.
      * @return Always returns false (not used in X-O logic).
      */
-    bool is_lose(Player<char> * player) { return false; };
+    bool is_lose(Player<char> * player) /*{ return false; }*/;
 
     /**
      * @brief Checks if the game has ended in a draw.
      * @param player Pointer to the player being checked.
      * @return true if all cells are filled and no player has won, false otherwise.
      */
-    bool is_draw(Player<char>  * player);
+    bool is_draw(Player<char>  * player) override;
 
     /**
      * @brief Determines if the game is over (win or draw).
      * @param player Pointer to the player to evaluate.
      * @return true if the game has ended, false otherwise.
      */
-    bool game_is_over(Player<char> * player);
+    bool game_is_over(Player<char> * player) override;
 
     void countSequences(char sym);
 
@@ -111,7 +111,7 @@ public:
  *
  * @see UI
  */
-class XO_UI : public UI<char>
+class _5X5_XO_UI : public UI<char>
 {
 public:
     /**
@@ -119,12 +119,12 @@ public:
      *
      * Initializes the base `UI<char>` class with the welcome message "FCAI X-O".
      */
-    XO_UI();
+    _5X5_XO_UI();
 
     /**
      * @brief Destructor for XO_UI.
      */
-    ~XO_UI() {};
+    ~_5X5_XO_UI() {};
 
     /**
      * @brief Creates a player of the specified type.
@@ -143,4 +143,4 @@ public:
     virtual Move<char>* get_move(Player<char>* player);
 };
 
-#endif // XO_CLASSES_H
+#endif // _5x5_XO_CLASSES_H

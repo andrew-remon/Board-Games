@@ -24,7 +24,7 @@ using namespace std;
  *
  * @see Board
  */
-class X_O_Board : public Board<char> {
+class inf_X_O_Board : public Board<char> {
 private:
     char blank_symbol = '.'; ///< Character used to represent an empty cell on the board.
     queue<pair<int,int>> q_moves;
@@ -32,7 +32,7 @@ public:
     /**
      * @brief Default constructor that initializes a 3x3 X-O board.
      */
-    X_O_Board();
+    inf_X_O_Board();
 
     /**
      * @brief Updates the board with a player's move.
@@ -80,7 +80,7 @@ public:
  *
  * @see UI
  */
-class XO_UI : public UI<char>
+class inf_XO_UI : public UI<char>
 {
 public:
     /**
@@ -88,12 +88,12 @@ public:
      *
      * Initializes the base `UI<char>` class with the welcome message "FCAI X-O".
      */
-    XO_UI();
+    inf_XO_UI();
 
     /**
      * @brief Destructor for XO_UI.
      */
-    ~XO_UI() {};
+    ~inf_XO_UI() {};
 
     /**
      * @brief Creates a player of the specified type.

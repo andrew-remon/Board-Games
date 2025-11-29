@@ -9,7 +9,7 @@ using namespace std;
 
 //--------------------------------------- X_O_Board Implementation
 
-X_O_Board::X_O_Board() : Board(5, 5)
+_5X5_X_O_Board::_5X5_X_O_Board() : Board(5, 5)
 {
     // Initialize all cells with blank_symbol
     for (auto& row : board)
@@ -17,7 +17,7 @@ X_O_Board::X_O_Board() : Board(5, 5)
             cell = blank_symbol;
 }
 
-bool X_O_Board::update_board(Move<char>* move)
+bool _5X5_X_O_Board::update_board(Move<char>* move)
 {
     int x = move->get_x();
     int y = move->get_y();
@@ -42,7 +42,7 @@ bool X_O_Board::update_board(Move<char>* move)
     return false;
 }
 
-bool X_O_Board::is_win(Player<char> * player)
+bool _5X5_X_O_Board::is_win(Player<char> * player)
 {
     if (n_moves == 24)
     {
@@ -69,17 +69,39 @@ bool X_O_Board::is_win(Player<char> * player)
     return false;
 }
 
-bool X_O_Board::is_draw(Player<char> * player)
+bool _5X5_X_O_Board::is_lose(Player<char> * player)
+{
+    if (n_moves == 24)
+    {
+
+        const char sym = player->get_symbol();
+        if (sym == 'X')
+        {
+            if (getPlayerXSequences() < getPlayerOSequences())
+                return true;
+        }
+
+        if (sym == 'O')
+        {
+            if (getPlayerOSequences() < getPlayerXSequences())
+                return true;
+        }
+    }
+
+    return false;
+}
+
+bool _5X5_X_O_Board::is_draw(Player<char> * player)
 {
     return (n_moves == 24 && playerOSequences == playerXSequences);
 }
 
-bool X_O_Board::game_is_over(Player<char> * player)
+bool _5X5_X_O_Board::game_is_over(Player<char> * player)
 {
     return (n_moves == 24 && (is_win(player) || is_draw(player)));
 }
 
-void X_O_Board::countSequences(char sym)
+void _5X5_X_O_Board::countSequences(char sym)
 {
     auto all_equal = [&](char a, char b, char c)
     {
@@ -148,14 +170,14 @@ void X_O_Board::countSequences(char sym)
 
 //------------------- XO_UI Implementation --------------------
 
-XO_UI::XO_UI() : UI<char>("Welcome to OUr 5x5 FCAI X-O Game\n", 5)
+_5X5_XO_UI::_5X5_XO_UI() : UI<char>("Welcome to OUr 5x5 FCAI X-O Game\n", 5)
 {
     cout << "This is just like the regular X-O Game Except that:\n";
     cout << "[1] It's 5x5 table, so each player has only 12 moves with one square empty at the end of the game\n";
     cout << "[2] each player try to have the most three-in-a-row sequence to win\n\n";
 }
 
-Player<char>* XO_UI::create_player(string& name, char symbol, PlayerType type)
+Player<char>* _5X5_XO_UI::create_player(string& name, char symbol, PlayerType type)
 {
     // Create player based on type
     cout << "Creating " << (type == PlayerType::HUMAN ? "human" : "computer")
@@ -164,7 +186,7 @@ Player<char>* XO_UI::create_player(string& name, char symbol, PlayerType type)
     return new Player<char>(name, symbol, type);
 }
 
-Move<char>* XO_UI::get_move(Player<char>* player)
+Move<char>* _5X5_XO_UI::get_move(Player<char>* player)
 {
     int x, y;
 
