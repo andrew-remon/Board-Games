@@ -8,7 +8,7 @@ using namespace std;
 
 //------------------- X_O_Board Implementation ----------------
 
-X_O_Board::X_O_Board() : Board(3, 3)
+word_X_O_Board::word_X_O_Board() : Board(3, 3)
 {
     // Initialize all cells with blank_symbol
     for (auto& row : board)
@@ -16,7 +16,7 @@ X_O_Board::X_O_Board() : Board(3, 3)
             cell = blank_symbol;
 }
 
-bool X_O_Board::update_board(Move<char>* move)
+bool word_X_O_Board::update_board(Move<char>* move)
 {
     int x = move->get_x();
     int y = move->get_y();
@@ -43,7 +43,7 @@ bool X_O_Board::update_board(Move<char>* move)
     return false;
 }
 
-bool X_O_Board::is_win(Player<char>* player)
+bool word_X_O_Board::is_win(Player<char>* player)
 {
     if (n_moves >= 3)
     {
@@ -91,15 +91,15 @@ bool X_O_Board::is_win(Player<char>* player)
     return false;
 }
 
-bool X_O_Board::is_draw(Player<char>* player) {
+bool word_X_O_Board::is_draw(Player<char>* player) {
     return (n_moves == 9 && !is_win(player));
 }
 
-bool X_O_Board::game_is_over(Player<char>* player) {
+bool word_X_O_Board::game_is_over(Player<char>* player) {
     return is_win(player) || is_draw(player);
 }
 
-bool X_O_Board::is_word_found(string word, const string& file_name)
+bool word_X_O_Board::is_word_found(string word, const string& file_name)
 {
     if (word.length() != 3)
         return false;
@@ -122,7 +122,7 @@ bool X_O_Board::is_word_found(string word, const string& file_name)
 
 //------------------- XO_UI Implementation --------------------
 
-XO_UI::XO_UI() : UI<char>("Welcome to Our FCAI Word Tic-Tac-Toe Game\n", 3)
+word_XO_UI::word_XO_UI() : UI<char>("Welcome to Our FCAI Word Tic-Tac-Toe Game\n", 3)
 {
     cout << "A version where players place letters on the board to form valid three-letter words in a 3x3 grid.\n";
     cout << "[1]Players take turns placing one letter on the board, attempting to form a valid word. Players can build upon letters already on the board.\n";
@@ -130,7 +130,7 @@ XO_UI::XO_UI() : UI<char>("Welcome to Our FCAI Word Tic-Tac-Toe Game\n", 3)
     cout << "[3]The game is a draw if the board is filled without a valid word being formed.\n\n";
 }
 
-Player<char>* XO_UI::create_player(string& name, char symbol, PlayerType type)
+Player<char>* word_XO_UI::create_player(string& name, char symbol, PlayerType type)
 {
     // Create player based on type
     cout << "Creating " << (type == PlayerType::HUMAN ? "human" : "computer")
@@ -139,7 +139,7 @@ Player<char>* XO_UI::create_player(string& name, char symbol, PlayerType type)
     return new Player<char>(name, symbol, type);
 }
 
-Move<char>* XO_UI::get_move(Player<char>* player)
+Move<char>* word_XO_UI::get_move(Player<char>* player)
 {
     int x, y;
 
@@ -160,25 +160,25 @@ Move<char>* XO_UI::get_move(Player<char>* player)
     return new Move<char>(x, y, player->get_symbol());
 }
 
-Player<char>** XO_UI::setup_players()
+Player<char>** word_XO_UI::setup_players()
 {
     Player<char>** players = new Player<char>*[2];
     vector<string> type_options = { "Human", "Computer" };
 
     string name1 = get_player_name("Player 1");
     PlayerType type1 = get_player_type_choice("Player 1", type_options);
-    players[0] = new XO_Player(name1, 'A', type1);
+    players[0] = new word_XO_Player(name1, 'A', type1);
 
     string name2 = get_player_name("Player 2");
     PlayerType type2 = get_player_type_choice("Player 2", type_options);
-    players[1] = new XO_Player(name2, 'B', type2);
+    players[1] = new word_XO_Player(name2, 'B', type2);
 
     return players;
 }
 
 //------------------- XO_Player Implementation --------------------
 
-void XO_Player::set_symbol()
+void word_XO_Player::set_symbol()
 {
     bool is_set_correctly = false;
 
@@ -208,7 +208,7 @@ void XO_Player::set_symbol()
     }
 }
 
-bool XO_Player::is_input_symbol_validated(char symbol)
+bool word_XO_Player::is_input_symbol_validated(char symbol)
 {
     if (symbol >= 65 && symbol <= 90) return true;
     return false;

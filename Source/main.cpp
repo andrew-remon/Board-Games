@@ -19,9 +19,9 @@ using namespace std;
 
 void RunWordXO()
 {
-    UI<char>* game_ui = new XO_UI();
+    UI<char>* game_ui = new word_XO_UI();
 
-    Board<char>* xo_board = new X_O_Board();
+    Board<char>* xo_board = new word_X_O_Board();
 
     Player<char>** players = game_ui->setup_players();
 

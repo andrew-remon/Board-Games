@@ -13,15 +13,6 @@
 #include "BoardGame_Classes.h"
 using namespace std;
 
-// class XO_Player : public Player<char>
-// {
-// private:
-
-
-// public:
-
-// };
-
 /**
  * @class X_O_Board
  * @brief Represents the Tic-Tac-Toe game board.

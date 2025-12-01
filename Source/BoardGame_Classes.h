@@ -144,11 +144,7 @@ class Player
 protected:
     string name;         ///< Player name
     PlayerType type;     ///< Player type (e.g., HUMAN or COMPUTER)
-<<<<<<< HEAD
-    T symbol;            ///< Player's symbol on board
-=======
     T symbol;            ///< Player’s symbol on board
->>>>>>> 6d0e8db87afd5e82ce625c68f4d2dcf92936659e
     Board<T>* boardPtr;  ///< Pointer to the game board
 
 public:
@@ -192,12 +188,8 @@ protected:
     /**
      * @brief Ask the user for the player's name.
      */
-<<<<<<< HEAD
-    string get_player_name(string player_label)
-    {
-=======
+
     virtual string get_player_name(string player_label) {
->>>>>>> 6d0e8db87afd5e82ce625c68f4d2dcf92936659e
         string name;
         cout << "Enter " << player_label << " name: ";
         getline(cin >> ws, name);
@@ -207,12 +199,9 @@ protected:
     /**
      * @brief Ask the user to choose the player type from a list.
      */
-<<<<<<< HEAD
+
     PlayerType get_player_type_choice(string player_label, const vector<string>& options)
     {
-=======
-    virtual PlayerType get_player_type_choice(string player_label, const vector<string>& options) {
->>>>>>> 6d0e8db87afd5e82ce625c68f4d2dcf92936659e
         cout << "Choose " << player_label << " type:\n";
 
         for (size_t i = 0; i < options.size(); ++i)
@@ -261,13 +250,8 @@ public:
     /**
      * @brief Display the current board matrix in formatted form.
      */
-<<<<<<< HEAD
-    void display_board_matrix(const vector<vector<T>>& matrix) const
-    {
-=======
 
     virtual void display_board_matrix(const vector<vector<T>>& matrix) const {
->>>>>>> 6d0e8db87afd5e82ce625c68f4d2dcf92936659e
         if (matrix.empty() || matrix[0].empty()) return;
 
         int rows = matrix.size();

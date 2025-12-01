@@ -7,8 +7,8 @@
  * - `XO_UI`: A user interface class tailored to X-O game setup and player interaction.
  */
 
-#ifndef XO_CLASSES_H
-#define XO_CLASSES_H
+#ifndef Word_XO_CLASSES_H
+#define Word_XO_CLASSES_H
 
 #include "BoardGame_Classes.h"
 using namespace std;
@@ -23,7 +23,7 @@ using namespace std;
  *
  * @see Board
  */
-class X_O_Board : public Board<char> {
+class word_X_O_Board : public Board<char> {
 private:
     char blank_symbol = '.'; ///< Character used to represent an empty cell on the board.
 
@@ -31,7 +31,7 @@ public:
     /**
      * @brief Default constructor that initializes a 3x3 X-O board.
      */
-    X_O_Board();
+    word_X_O_Board();
 
     /**
      * @brief Updates the board with a player's move.
@@ -71,10 +71,10 @@ public:
     bool is_word_found(string word, const string& file_name);
 };
 
-class XO_Player : public Player<char>
+class word_XO_Player : public Player<char>
 {
 public:
-    XO_Player(string n, char s, PlayerType t) : Player(n, s, t) {};
+    word_XO_Player(string n, char s, PlayerType t) : Player(n, s, t) {};
 
     void set_symbol();
 
@@ -91,7 +91,7 @@ public:
  *
  * @see UI
  */
-class XO_UI : public UI<char>
+class word_XO_UI : public UI<char>
 {
 public:
     /**
@@ -99,12 +99,12 @@ public:
      *
      * Initializes the base `UI<char>` class with the welcome message "FCAI X-O".
      */
-    XO_UI();
+    word_XO_UI();
 
     /**
      * @brief Destructor for XO_UI.
      */
-    ~XO_UI() {};
+    ~word_XO_UI() {};
 
     /**
      * @brief Creates a player of the specified type.
@@ -125,4 +125,4 @@ public:
     Player<char>** setup_players();
 };
 
-#endif // XO_CLASSES_H
+#endif // Word_XO_CLASSES_H
