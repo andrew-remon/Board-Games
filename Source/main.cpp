@@ -11,11 +11,27 @@
 #include "5x5XO_Classes.h"
 #include "Infinity_XO_Classes.h"
 #include "Word_XO_Classes.h"
+#include "Connect_4.h"
 #include "InputValidation.h"
 
 using namespace std;
 
 // ======= Game Runners =======
+
+void RunConnect4()
+{
+    UI<char>* game_ui = new connect_4_UI();
+    Board<char>* xo_board = new connect_4_Board();
+    Player<char>** players = game_ui->setup_players();
+    GameManager<char> x_o_game(xo_board, players, game_ui);
+    x_o_game.run();
+    // --- Cleanup ---
+    delete xo_board;
+    delete game_ui;
+    delete players[0];
+    delete players[1];
+    delete[] players;
+}
 
 void RunWordXO()
 {
@@ -151,6 +167,9 @@ void Run4X4Game() {
 
 int main()
 {
+
+    srand(static_cast<unsigned int>(time(NULL)));
+
     cout << "Choose a Game To Play\n";
     cout << "[1] MisereXO\n";
     cout << "[2] NumXO\n";
@@ -159,8 +178,9 @@ int main()
     cout << "[5] 5x5 XO\n";
     cout << "[6] Infinity XO\n";
     cout << "[7] Word XO\n";
+    cout << "[8] Connect 4\n";
 
-    int x = InputValidation::readIntNumberBetween(1, 6, "Invalid Input, Please Enter a number from 1 to 7");
+    int x = InputValidation::readIntNumberBetween(1, 8, "Invalid Input, Please Enter a number from 1 to 8");
     // cin >> x;
 
 	// will use enum later for better readability
@@ -185,6 +205,10 @@ int main()
         break;
     case 7:
         RunWordXO();
+		break;
+	case 8:
+		RunConnect4();
+		break;
     default:
         cout << "Invalid Choice.\n";
         break;
