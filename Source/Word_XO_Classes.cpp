@@ -128,6 +128,9 @@ word_XO_UI::word_XO_UI() : UI<char>("Welcome to Our FCAI Word Tic-Tac-Toe Game\n
     cout << "[1]Players take turns placing one letter on the board, attempting to form a valid word. Players can build upon letters already on the board.\n";
     cout << "[2]The first player to form a valid three-letter word horizontally, vertically, or diagonally wins.\n";
     cout << "[3]The game is a draw if the board is filled without a valid word being formed.\n\n";
+
+
+    srand(static_cast<unsigned int>(time(NULL)));
 }
 
 Player<char>* word_XO_UI::create_player(string& name, char symbol, PlayerType type)

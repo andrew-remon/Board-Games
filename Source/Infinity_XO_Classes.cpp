@@ -96,6 +96,8 @@ inf_XO_UI::inf_XO_UI() : UI<char>("Welcome to Our FCAI Infinity X-O Game\n", 3)
     cout << "This is a regular 3x3 Tic Tac Toe Game note that:\n";
     cout << "[1] After every three moves, the oldest mark on the board disappears.\n";
     cout << "[2] The first player to align three marks in a row before any of those marks vanish wins the game\n\n";
+
+    srand(static_cast<unsigned int>(time(NULL)));
 }
 
 Player<char>* inf_XO_UI::create_player(string& name, char symbol, PlayerType type)

@@ -11,6 +11,8 @@ NumXO_UI::NumXO_UI() : UI<int>("Welcome to Our FCAI Numerical X-O Game\n", 3)
     cout << "[1] One Player should play only with Odd Numbers while the other with Even Ones\n";
     cout << "[2] Odd & Even Numbers are less than 10 and only used once during the game\n";
     cout << "[3] The player who completes one row, column or diagonal with cells sum equal to '15' wins.\n\n";
+
+    srand(static_cast<unsigned int>(time(NULL)));
 }
 
 Player<int>* NumXO_UI::create_player(string& name, int symbol, PlayerType type)

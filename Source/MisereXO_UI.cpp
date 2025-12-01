@@ -12,6 +12,9 @@ MisereXO_UI::MisereXO_UI() : UI<char>("Welcome to Our FCAI Misere X-O Game\n", 3
     cout << "If the board is filled with no player achieving three in a row, the game is a draw.\n";
     cout << "The objective is to force your opponent to get three-in-a-row\n";
     cout << "And to avoid placing three of your marks in a row, column, or diagonal.\n\n";
+
+
+    srand(static_cast<unsigned int>(time(NULL)));
 }
 
 Player<char>* MisereXO_UI::create_player(string& name, char symbol, PlayerType type)

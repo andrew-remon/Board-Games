@@ -9,6 +9,8 @@ SuS_TTT_UI::SuS_TTT_UI() : UI<char>("Welcome to Our FCAI SuS X-O Game\n", 3)
     cout << "The Rules are as following:\n";
     cout << "Players take turns placing either an \"S\" or a \"U\" in an empty square.\n";
     cout << "A player must use the same letter each turn.\n";
+
+    srand(static_cast<unsigned int>(time(NULL)));
 }
 
 Player<char>* SuS_TTT_UI::create_player(string& name, char symbol, PlayerType type)
