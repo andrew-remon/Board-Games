@@ -14,7 +14,7 @@ MisereXO_UI::MisereXO_UI() : UI<char>("Welcome to Our FCAI Misere X-O Game\n", 3
     cout << "And to avoid placing three of your marks in a row, column, or diagonal.\n\n";
 
 
-    srand(static_cast<unsigned int>(time(NULL)));
+
 }
 
 Player<char>* MisereXO_UI::create_player(string& name, char symbol, PlayerType type)

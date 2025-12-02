@@ -175,9 +175,6 @@ _5X5_XO_UI::_5X5_XO_UI() : UI<char>("Welcome to OUr 5x5 FCAI X-O Game\n", 5)
     cout << "This is just like the regular X-O Game Except that:\n";
     cout << "[1] It's 5x5 table, so each player has only 12 moves with one square empty at the end of the game\n";
     cout << "[2] each player try to have the most three-in-a-row sequence to win\n\n";
-
-
-    srand(static_cast<unsigned int>(time(NULL)));
 }
 
 Player<char>* _5X5_XO_UI::create_player(string& name, char symbol, PlayerType type)

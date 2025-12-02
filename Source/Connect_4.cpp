@@ -59,17 +59,12 @@ bool connect_4_Board::game_is_over(Player<char>* player)
 }
 
 
-connect_4_UI::connect_4_UI() : UI() {
-	//srand(static_cast<unsigned int>(time(NULL)));
-}
+connect_4_UI::connect_4_UI() : UI() {}
 
 
 Player<char>* connect_4_UI::create_player(string& name, char symbol, PlayerType type)
 {
-	if (type == PlayerType::HUMAN)
-		return new Player<char>(name, symbol , PlayerType::HUMAN);
-	else
-		return new Player<char>(name, symbol , PlayerType::COMPUTER);
+	return new Player<char>(name, symbol , type);
 }
 
 Move<char>* connect_4_UI::get_move(Player<char>* player)
