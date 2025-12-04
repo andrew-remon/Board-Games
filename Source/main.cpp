@@ -14,6 +14,8 @@
 #include "Connect_4.h"
 #include "Ultimate_X_O.h"
 #include "InputValidation.h"
+#include "DiamondXO_Board.h"
+#include "DiamondXO_UI.h"
 
 // ======= Game Type Enum =======
 
@@ -27,7 +29,8 @@ enum MenuOptions {
     WORD_XO = 7,
     CONNECT_4 = 8,
     ULTIMATE_XO = 9,
-    EXIT = 10
+    Diamond_XO = 10,
+    EXIT = 11
 };
 
 // ======= Games Class =======
@@ -192,6 +195,21 @@ public:
         delete players[1];
         delete[] players;
     }
+
+    static void RunDiamondXOGame() {
+        Board<char>* board = new DiamondXO_Board();
+        UI<char>* ui = new DiamondXO_UI();
+        Player<char>** players = ui->setup_players();
+        GameManager<char> manager(board, players, ui);
+        manager.run();
+
+        //Clean up
+        delete board;
+        delete ui;
+        delete players[0];
+        delete players[1];
+        delete[] players;
+    }
 };
 
 // ======= Main Menu =======
@@ -207,32 +225,46 @@ void gameHandler(MenuOptions choice) {
     case MenuOptions::MISERE_XO:
         Games::RunMisereXO();
         break;
+
     case MenuOptions::NUM_XO:
         Games::RunNumXO();
         break;
+
     case MenuOptions::SUS_XO:
         Games::RunSuSXO();
         break;
+
     case MenuOptions::FOUR_X_FOUR_XO:
         Games::Run4X4Game();
         break;
+
     case MenuOptions::FIVE_X_FIVE_XO:
         Games::Run5x5XO();
         break;
+
     case MenuOptions::INFINITY_XO:
         Games::RunInfinityXO();
         break;
+
     case MenuOptions::WORD_XO:
         Games::RunWordXO();
         break;
+
     case MenuOptions::CONNECT_4:
         Games::RunConnect4();
         break;
+
     case MenuOptions::ULTIMATE_XO:
         Games::RunUltimateXO();
         break;
+
+    case MenuOptions::Diamond_XO:
+        Games::RunDiamondXOGame();
+        break;
+
     case MenuOptions::EXIT:
         return;
+
     default:
         cout << "==========================================\n";
         cout << "Invalid choice. Please try again.\n";
@@ -244,22 +276,23 @@ void Menu() {
     cout << "Welcome to the Ultimate XO Game Collection!\n";
     cout << "Choose a game to play from the menu below:\n";
     cout << "==========================================\n";
-    cout << "[1] MisereXO\n";
-    cout << "[2] NumXO\n";
-    cout << "[3] SusXO\n";
-    cout << "[4] 4x4 XO\n";
-    cout << "[5] 5x5 XO\n";
-    cout << "[6] Infinity XO\n";
-    cout << "[7] Word XO\n";
-    cout << "[8] Connect 4\n";
-	cout << "[9] Ultimate XO (demo)\n";
-	cout << "[10] exit\n";
+    cout << "[1]  MisereXO\n";
+    cout << "[2]  NumXO\n";
+    cout << "[3]  SusXO\n";
+    cout << "[4]  4x4 XO\n";
+    cout << "[5]  5x5 XO\n";
+    cout << "[6]  Infinity XO\n";
+    cout << "[7]  Word XO\n";
+    cout << "[8]  Connect 4\n";
+	cout << "[9]  Ultimate XO (demo)\n";
+	cout << "[10] Diamond XO \n";
+	cout << "[11] exit\n";
     cout << "==========================================\n";
     
 
-    MenuOptions choice = static_cast<MenuOptions>(InputValidation::readIntNumberBetween(1, 10, "Invalid Input, Please Enter a number from 1 to 10"));
+    MenuOptions choice = static_cast<MenuOptions>(InputValidation::readIntNumberBetween(1, 11, "Invalid Input, Please Enter a number from 1 to 11"));
 
-    if (choice != 10) {
+    if (choice != MenuOptions::EXIT) {
         gameHandler(choice);
 		anotherGame();
     }
