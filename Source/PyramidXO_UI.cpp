@@ -1,26 +1,24 @@
-// DiamondXO_UI.cpp
+// PyramidXO_UI.cpp
 #include <iostream>
 #include <cmath>
 #include "InputValidation.h"
-#include "DiamondXO_UI.h"
+#include "PyramidXO_UI.h"
 using namespace std;
 
-bool DiamondXO_UI::is_in_diamond(int i,int j) const
+bool PyramidXO_UI::is_in_pyramid(int i, int j) const
 {
-    return ((i >= 0 && i < 7 && j>= 0 && j < 7) && (abs(i-3) + abs(j-3) <= 3));
+    return ( i >= 0 && i < 3 && j >= 0 && j < 5) && (abs(j - 2) <= i);
 }
 
-DiamondXO_UI::DiamondXO_UI() : UI<char>("\nWelcome to Our FCAI Diamond X-O Game\n", 3)
+PyramidXO_UI::PyramidXO_UI() : UI<char>("\nWelcome to Our FCAI Pyramid X-O Game\n", 3)
 {
-    cout << "This is a Diamond Tic Tac Toe Game played by two players.\n";
+    cout << "This is a Pyramid Tic Tac Toe Game played by two players.\n";
     cout << "The Rules are as following:\n";
-    cout << "A player wins by simultaneously completing a line of three marks and a line of four marks.\n";
-    cout << "If the board is filled with no player achieving three in a row, the game is a draw.\n";
-    cout << "Where The two lines must be in different directions(e.g., one horizontal, one diagonal) but can share one common mark.\n\n";
-
+    cout << "Players take turns placing their 'X' or 'O' marks in empty squares.\n";
+    cout << "The first player to align three of their marks horizontally, vertically, or diagonally wins.\n\n";
 }
 
-Player<char>* DiamondXO_UI::create_player(string& name, char symbol, PlayerType type)
+Player<char>* PyramidXO_UI::create_player(string& name, char symbol, PlayerType type)
 {
     cout << "Creating " << (type == PlayerType::HUMAN ? "human" : "computer") << " player: " << name << " (" << symbol << ")\n";
 
@@ -28,13 +26,13 @@ Player<char>* DiamondXO_UI::create_player(string& name, char symbol, PlayerType 
     return new Player<char>(name, symbol, type);
 }
 
-Move<char>* DiamondXO_UI::get_move(Player<char>* player)
+Move<char>* PyramidXO_UI::get_move(Player<char>* player)
 {
     int x, y;
 
     if (player->get_type() == PlayerType::HUMAN)
     {
-        cout << "\nPlease enter your move square position in the form of x-axis and y-axis (0 to 6): ";
+        cout << "\nPlease enter your move square position in the form of x-axis (0 to 4) and y-axis (0 to 2): ";
         cin >> x >> y;
     }
     else if (player->get_type() == PlayerType::COMPUTER)
@@ -43,14 +41,14 @@ Move<char>* DiamondXO_UI::get_move(Player<char>* player)
         int columns = player->get_board_ptr()->get_columns();
         bool valid_move_found = false;
 
-        while (!valid_move_found)
+        while(!valid_move_found)
         {
             x = rand() % rows;
             y = rand() % columns;
 
             Board<char>* boardPtr = player->get_board_ptr();
             char cell_content = boardPtr->get_cell(x, y);
-            if (cell_content == ' ' && is_in_diamond(x, y))
+            if (cell_content == ' ' && is_in_pyramid(x, y))
             {
                 valid_move_found = true;
             }
@@ -62,7 +60,7 @@ Move<char>* DiamondXO_UI::get_move(Player<char>* player)
     return new Move<char>(x, y, player->get_symbol());
 }
 
-Player<char>** DiamondXO_UI::setup_players()
+Player<char>** PyramidXO_UI::setup_players()
 {
     Player<char>** players = new Player<char>*[2];
     vector<string> type_options = { "Human", "Computer" };
@@ -84,15 +82,15 @@ Player<char>** DiamondXO_UI::setup_players()
     players[1] = create_player(name2, symbolO, type2);
 
     return players;
-}
+} 
 
-void DiamondXO_UI::display_board_matrix(const vector<vector<char>>& matrix) const
+void PyramidXO_UI::display_board_matrix(const vector<vector<char>>& matrix) const
 {
     if (matrix.empty() || matrix[0].empty()) return;
-    
+
     int rows = matrix.size();
     int cols = matrix[0].size();
-    int cell_width = this -> cell_width;
+    int cell_width = this->cell_width;
 
     cout << "\n    ";
     for (int j = 0; j < cols; j++)
@@ -108,7 +106,7 @@ void DiamondXO_UI::display_board_matrix(const vector<vector<char>>& matrix) cons
 
         for (int j = 0; j < cols; j++)
         {
-            if (is_in_diamond(i, j))
+            if (is_in_pyramid(i, j))
             {
                 cout << setw(cell_width) << matrix[i][j] << " |";
             }
@@ -122,4 +120,4 @@ void DiamondXO_UI::display_board_matrix(const vector<vector<char>>& matrix) cons
         cout << "   " << string((cell_width + 2) * cols, '-') << "\n";
     }
     cout << endl;
-} 
+}

@@ -20,6 +20,8 @@
 #include "ObstacleXO_UI.h"
 #include "MemoryXO_Board.h"
 #include "MemoryXO_UI.h"
+#include "PyramidXO_Board.h"
+#include "PyramidXO_UI.h"
 
 // ======= Game Type Enum =======
 
@@ -36,7 +38,8 @@ enum MenuOptions {
     Diamond_XO = 10,
     Obstacle_XO = 11,
     Memory_XO = 12,
-    EXIT = 13
+    Pyramid_XO = 13,
+    EXIT = 14
 };
 
 // ======= Games Class =======
@@ -245,6 +248,20 @@ public:
         delete players[1];
         delete[] players;
     }
+    static void RunPyramidXOGame() {
+        Board<char>* board = new PyramidXO_Board();
+        UI<char>* ui = new PyramidXO_UI();
+        Player<char>** players = ui->setup_players();
+        GameManager<char> manager(board, players, ui);
+        manager.run();
+
+        //Clean up
+        delete board;
+        delete ui;
+        delete players[0];
+        delete players[1];
+        delete[] players;
+    }
 };
 
 // ======= Main Menu =======
@@ -305,6 +322,10 @@ void gameHandler(MenuOptions choice) {
         Games::RunMemoryXOGame();
         break;
 
+    case MenuOptions::Pyramid_XO:
+        Games::RunPyramidXOGame();
+        break;
+
     case MenuOptions::EXIT:
         return;
 
@@ -331,11 +352,12 @@ void Menu() {
 	cout << "[10] Diamond XO \n";
 	cout << "[11] Obstacle XO \n";
 	cout << "[12] Memory XO \n";
-	cout << "[13] exit\n";
+	cout << "[13] Pyramid XO \n";
+	cout << "[14] exit\n";
     cout << "==========================================\n";
     
 
-    MenuOptions choice = static_cast<MenuOptions>(InputValidation::readIntNumberBetween(1, 13, "Invalid Input, Please Enter a number from 1 to 13"));
+    MenuOptions choice = static_cast<MenuOptions>(InputValidation::readIntNumberBetween(1, 14, "Invalid Input, Please Enter a number from 1 to 14"));
 
     if (choice != MenuOptions::EXIT) {
         gameHandler(choice);
