@@ -16,6 +16,8 @@
 #include "InputValidation.h"
 #include "DiamondXO_Board.h"
 #include "DiamondXO_UI.h"
+#include "ObstacleXO_Board.h"
+#include "ObstacleXO_UI.h"
 
 // ======= Game Type Enum =======
 
@@ -30,7 +32,8 @@ enum MenuOptions {
     CONNECT_4 = 8,
     ULTIMATE_XO = 9,
     Diamond_XO = 10,
-    EXIT = 11
+    Obstacle_XO = 11,
+    EXIT = 12
 };
 
 // ======= Games Class =======
@@ -210,6 +213,21 @@ public:
         delete players[1];
         delete[] players;
     }
+
+    static void RunObstacleXOGame() {
+        Board<char>* board = new ObstacleXO_Board();
+        UI<char>* ui = new ObstacleXO_UI();
+        Player<char>** players = ui->setup_players();
+        GameManager<char> manager(board, players, ui);
+        manager.run();
+
+        //Clean up
+        delete board;
+        delete ui;
+        delete players[0];
+        delete players[1];
+        delete[] players;
+    }
 };
 
 // ======= Main Menu =======
@@ -262,6 +280,10 @@ void gameHandler(MenuOptions choice) {
         Games::RunDiamondXOGame();
         break;
 
+    case MenuOptions::Obstacle_XO:
+        Games::RunObstacleXOGame();
+        break;
+
     case MenuOptions::EXIT:
         return;
 
@@ -286,11 +308,12 @@ void Menu() {
     cout << "[8]  Connect 4\n";
 	cout << "[9]  Ultimate XO (demo)\n";
 	cout << "[10] Diamond XO \n";
-	cout << "[11] exit\n";
+	cout << "[11] Obstacle XO \n";
+	cout << "[12] exit\n";
     cout << "==========================================\n";
     
 
-    MenuOptions choice = static_cast<MenuOptions>(InputValidation::readIntNumberBetween(1, 11, "Invalid Input, Please Enter a number from 1 to 11"));
+    MenuOptions choice = static_cast<MenuOptions>(InputValidation::readIntNumberBetween(1, 12, "Invalid Input, Please Enter a number from 1 to 12"));
 
     if (choice != MenuOptions::EXIT) {
         gameHandler(choice);
