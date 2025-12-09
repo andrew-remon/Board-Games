@@ -23,6 +23,7 @@
 #include "PyramidXO_Board.h"
 #include "PyramidXO_UI.h"
 
+
 // ======= Game Type Enum =======
 
 enum MenuOptions {
@@ -348,7 +349,7 @@ void Menu() {
     cout << "[6]  Infinity XO\n";
     cout << "[7]  Word XO\n";
     cout << "[8]  Connect 4\n";
-	cout << "[9]  Ultimate XO (demo)\n";
+	cout << "[9]  Ultimate XO \n";
 	cout << "[10] Diamond XO \n";
 	cout << "[11] Obstacle XO \n";
 	cout << "[12] Memory XO \n";
