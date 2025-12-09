@@ -52,7 +52,7 @@ void SuS_TTT_Board::checkLatestBoard(map<string, bool>& winCondition ) {
         bool& itsBool = it.second;
 
         if (!itsBool) {
-            if (condition == "vertLeft"    && (board[0][0] == 's' && board[1][0] == 'u' && board[2][0] == 's')) { (isFirst) ? player1Sequences++:player2Sequences++ ; itsBool = true; }
+                 if (condition == "vertLeft"    && (board[0][0] == 's' && board[1][0] == 'u' && board[2][0] == 's')) { (isFirst) ? player1Sequences++:player2Sequences++ ; itsBool = true; }
             else if (condition == "vertMid"     && (board[0][1] == 's' && board[1][1] == 'u' && board[2][1] == 's')) { (isFirst) ? player1Sequences++:player2Sequences++ ; itsBool = true; }
             else if (condition == "vertRight"   && (board[0][2] == 's' && board[1][2] == 'u' && board[2][2] == 's')) { (isFirst) ? player1Sequences++:player2Sequences++ ; itsBool = true; }
             else if (condition == "horzTop"     && (board[0][0] == 's' && board[0][1] == 'u' && board[0][2] == 's')) { (isFirst) ? player1Sequences++:player2Sequences++ ; itsBool = true; }
