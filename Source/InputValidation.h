@@ -4,15 +4,23 @@
 #include <string>
 using namespace std;
 
+/**
+ * @class InputValidation
+ * @brief Provides static methods for validating and reading user input.
+ *
+ * This class includes methods to read integer inputs and validate
+ * whether they fall within specified ranges.
+ */
 class InputValidation
 {
 public:
 
+	// Check if a number is within a specified range (inclusive)
     static bool isNumberBetween(int number, int from, int to)
     {
         return (number >= from && number <= to);
     }
-
+	// Read an integer number from user input with validation
     static int readIntNumber(string errorMessage = "Invalid Input, Please enter a Number")
     {
         string input;
@@ -47,7 +55,7 @@ public:
         return number;
     }
 
-
+	// Read an integer number within a specified range with validation
     static int readIntNumberBetween(int from, int to, string errorMessage)
     {
         while (true)

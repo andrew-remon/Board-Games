@@ -1,20 +1,5 @@
 #include "Ultimate_X_O.h"
 #include "inputValidation.h"
-#include <map>
-
-
-
-//map<string, pair<bool, bool>> alreadyWon = {
-//	{"TopLeft",   std::make_pair(false, false)},
-//	{"TopMid",    std::make_pair(false, false)},
-//	{"TopRight",  std::make_pair(false, false)},
-//	{"MidLeft",   std::make_pair(false, false)},
-//	{"MidMid",    std::make_pair(false, false)},
-//	{"MidRight",  std::make_pair(false, false)},
-//	{"BotLeft",   std::make_pair(false, false)},
-//	{"BotMid",    std::make_pair(false, false)},
-//	{"BotRight",  std::make_pair(false, false)}
-//};
 
 Ultimate_X_O_Board::Ultimate_X_O_Board() : Board<char>(9,9) {
 	for (int i = 0; i < rows; ++i) {
@@ -237,7 +222,7 @@ Move<char>* Ultimate_X_O_UI::get_move(Player<char>* player) {
 
 	if (player->get_type() == PlayerType::HUMAN)
 	{
-		cout << "\nPlease enter your move x and y (0 to 2): ";
+		cout << "\nPlease enter your move x and y (0 to 8): ";
 		cin >> x >> y;
 		return new Move<char>(x, y, player->get_symbol());
 	}

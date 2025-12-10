@@ -68,16 +68,44 @@ public:
      */
     bool game_is_over(Player<char>* player) override;
 
+    /**
+	* @brief Checks if a word is found in the specified file.
+	* @param word The word to search for.
+	* @param file_name The name of the file to search in.
+	* @return true if the word is found, false otherwise.
+    */
     bool is_word_found(string word, const string& file_name);
 };
 
+/**
+ * @class word_XO_Player
+ * @brief Represents a player in the X-O (Tic-Tac-Toe) game.
+ *
+ * Inherits from the generic `Player<char>` base class and provides
+ * X-O-specific functionality for symbol assignment and validation.
+ *
+ * @see Player
+ */
 class word_XO_Player : public Player<char>
 {
 public:
+    /**
+     * @brief Constructs a word_XO_Player object.
+     * @param n Name of the player.
+     * @param s Character symbol ('X' or 'O') assigned to the player.
+	 * @param t The type of the player (Human or Computer).
+	 */
     word_XO_Player(string n, char s, PlayerType t) : Player(n, s, t) {};
 
+    /**
+    * @brief Sets the player's symbol after validating it.
+	*/
     void set_symbol();
-
+	/**
+	* @brief Validates if the input symbol is either 'X' or 'O'.
+	* @param symbol The character symbol to validate.
+	* @return true if the symbol is valid, false otherwise.
+    */
     bool is_input_symbol_validated(char symbol);
 };
 
@@ -122,6 +150,10 @@ public:
      */
     Move<char>* get_move(Player<char>* player) override;
 
+	/**
+	* @brief sets up the players for the game.
+	* @return Pointer to an array of two  Player<char> instances.
+    */
     Player<char>** setup_players();
 };
 

@@ -2,19 +2,36 @@
 #include "BoardGame_Classes.h"
 using namespace std;
 
+/**
+ * @class DiamondXO_Board
+ * @brief Represents the Diamond X-O game board.
+ *
+ * This class inherits from the generic `Board<char>` class and implements
+ * the specific logic required for the Diamond X-O game, including
+ * move updates, win/draw detection, and game over conditions.
+ *
+ * @see Board
+ */
 class DiamondXO_Board : public Board<char> {
 private:
-    
+   
+	// Check if the given coordinates are within the diamond shape
     bool is_in_diamond(int i, int j) const;
 
 
 public:
+    /**
+     * @brief Directions for line detection.
+	 */
     enum Direction {
         Horizontal,
         Vertical,
         DiagonalUp,
         DiagonalDown
     };
+    /**
+	 * @brief Structure to represent a line on the board.
+     */
 
     struct Line {
         int length;
@@ -22,18 +39,39 @@ public:
         vector<pair<int, int>> coordinates;
     };
 
+	/// @brief Find all lines of a given symbol on the board.
     vector<Line> find_all_lines(char symbol);
-    
+	/// @brief Default constructor that initializes a Diamond X-O board.
     DiamondXO_Board();
-
+    /**
+	 * @brief Updates the board with a player's move.
+     * @param move Pointer to a Move<char> object containing move coordinates and symbol.
+	 * @return true if the move is valid and successfully applied, false otherwise.
+     */
 	bool update_board(Move<char>* move) override;
-
+	/**
+	* @brief Checks if the given player has won the game.
+	* @param player Pointer to the player being checked.
+    * @return true if the player has a winning line, false otherwise.
+	*/
     bool is_win(Player<char>* player) override;
-
+	/**
+	* @brief Checks if the given player has lost the game.
+	* @param player Pointer to the player being checked.
+	* @return true if the player has lost, false otherwise.
+    */
     bool is_lose(Player<char>* player) override;
-
+	/**
+	* @brief Checks if the game has ended in a draw.
+	* @param player Pointer to the player being checked.
+	* @return true if all cells are filled and no player has won, false otherwise.
+    */
     bool is_draw(Player<char>* player) override;
-
+    /**
+	* @brief Determines if the game is over (win or draw).
+	* @param player Pointer to the player to evaluate.
+    * @return true if the game has ended, false otherwise.
+	*/
     bool game_is_over(Player<char>* player) override;
 
 };
