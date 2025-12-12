@@ -32,7 +32,7 @@ Move<char>* PyramidXO_UI::get_move(Player<char>* player)
 
     if (player->get_type() == PlayerType::HUMAN)
     {
-        cout << "\nPlease enter your move square position in the form of x-axis (0 to 4) and y-axis (0 to 2): ";
+        cout << "\nPlease enter your move square position in the form of y-axis (0 to 2) and x-axis (0 to 4): ";
         cin >> x >> y;
     }
     else if (player->get_type() == PlayerType::COMPUTER)
