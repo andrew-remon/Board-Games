@@ -51,7 +51,7 @@ public:
 	* @param winFlag Reference to a boolean that will be set to true if a win is detected.
 	* @return true if a win is detected, false otherwise.
 	*/
-	bool check_win(int Xstart, int Xend, int Ystart, int Yend, char symbol, bool& winFlag);
+	bool checkWin(int Xstart, int Xend, int Ystart, int Yend, char symbol, bool& winFlag);
 	/**
 	* @brief Loops through a section of the board and fills blank cells with a specified symbol.
 	* @param xstart Starting X coordinate.

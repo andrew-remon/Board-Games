@@ -42,7 +42,7 @@ bool Ultimate_X_O_Board::update_board(Move<char>* move) {
     return true;
 }
 
-bool Ultimate_X_O_Board::check_win(int Xstart, int Xend,int Ystart  ,int Yend  ,char symbol, bool& winFlag) {
+bool Ultimate_X_O_Board::checkWin(int Xstart, int Xend,int Ystart  ,int Yend  ,char symbol, bool& winFlag) {
 	// ====== horizontal check =======
 	for (int i = Xstart; i <= Xend; i++) {
 		if (board[i][Ystart] == symbol && board[i][Ystart + 1] == symbol && board[i][Ystart + 2] == symbol) {
@@ -85,7 +85,7 @@ void Ultimate_X_O_Board::checksmallWin(char symbol, string& s, bool& b) {
 	string debugger;
 	if (s == "TopLeft")
 	{
-		if (check_win(0, 2, 0, 2, symbol, b)) {
+		if (checkWin(0, 2, 0, 2, symbol, b)) {
 			debugger = (symbol == 'X') ? "X won" : "O Won";
 			cout << debugger << ' ' << s << endl;
 			b = true;
@@ -94,7 +94,7 @@ void Ultimate_X_O_Board::checksmallWin(char symbol, string& s, bool& b) {
 	}
 	else if (s == "TopMid")
 	{
-		if (check_win(0, 2, 3, 5, symbol, b)) {
+		if (checkWin(0, 2, 3, 5, symbol, b)) {
 			debugger = (symbol == 'X') ? "X won" : "O Won";
 			cout << debugger << ' ' << s << endl;
 			b = true;
@@ -103,7 +103,7 @@ void Ultimate_X_O_Board::checksmallWin(char symbol, string& s, bool& b) {
 	}
 	else if (s == "TopRight")
 	{
-		if(check_win(0, 2, 6, 8, symbol, b)) {
+		if(checkWin(0, 2, 6, 8, symbol, b)) {
 			debugger = (symbol == 'X') ? "X won" : "O Won";
 			cout << debugger << ' ' << s << endl;
 			b = true;
@@ -112,7 +112,7 @@ void Ultimate_X_O_Board::checksmallWin(char symbol, string& s, bool& b) {
 	}
 	else if (s == "MidLeft")
 	{
-		if (check_win(3, 5, 0, 2, symbol, b)) {
+		if (checkWin(3, 5, 0, 2, symbol, b)) {
 			debugger = (symbol == 'X') ? "X won" : "O Won";
 			cout << debugger << ' ' << s << endl;
 			b = true;
@@ -121,7 +121,7 @@ void Ultimate_X_O_Board::checksmallWin(char symbol, string& s, bool& b) {
 	}
 	else if (s == "MidMid")
 	{	
-		if (check_win(3, 5, 3, 5, symbol, b)) {
+		if (checkWin(3, 5, 3, 5, symbol, b)) {
 			debugger = (symbol == 'X') ? "X won" : "O Won";
 			cout << debugger << ' ' << s << endl;
 			b = true;
@@ -130,7 +130,7 @@ void Ultimate_X_O_Board::checksmallWin(char symbol, string& s, bool& b) {
 	}
 	else if (s == "MidRight")
 	{
-		if (check_win(3, 5, 6, 8, symbol, b)) {
+		if (checkWin(3, 5, 6, 8, symbol, b)) {
 			debugger = (symbol == 'X') ? "X won" : "O Won";
 			cout << debugger << ' ' << s << endl;
 			b = true;
@@ -139,7 +139,7 @@ void Ultimate_X_O_Board::checksmallWin(char symbol, string& s, bool& b) {
 	}
 	else if (s == "BotLeft")
 	{
-		if (check_win(6, 8, 0, 2, symbol, b)) {
+		if (checkWin(6, 8, 0, 2, symbol, b)) {
 			debugger = (symbol == 'X') ? "X won" : "O Won";
 			cout << debugger << ' ' << s << endl;
 			b = true;
@@ -148,7 +148,7 @@ void Ultimate_X_O_Board::checksmallWin(char symbol, string& s, bool& b) {
 	}
 	else if (s == "BotMid")
 	{
-		if (check_win(6, 8, 3, 5, symbol, b)) {
+		if (checkWin(6, 8, 3, 5, symbol, b)) {
 			debugger = (symbol == 'X') ? "X won" : "O Won";
 			cout << debugger << ' ' << s << endl;
 			b = true;
@@ -157,7 +157,7 @@ void Ultimate_X_O_Board::checksmallWin(char symbol, string& s, bool& b) {
 	}
 	else if (s == "BotRight")
 	{
-		if (check_win(6, 8, 6, 8, symbol, b)) {
+		if (checkWin(6, 8, 6, 8, symbol, b)) {
 			debugger = (symbol == 'X') ? "X won" : "O Won";
 			cout << debugger << ' ' << s << endl;
 			b = true;
